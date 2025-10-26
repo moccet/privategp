@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { Playfair_Display } from 'next/font/google';
+import TopBar from '@/components/TopBar';
+import Sidebar from '@/components/testing-landing/Sidebar';
 import PrivateGPHero from '@/components/services-landing/PrivateGPHero';
 import ConsultationOptionsSection from '@/components/services-landing/ConsultationOptionsSection';
 import ConsultationCardsSection from '@/components/services-landing/ConsultationCardsSection';
@@ -21,6 +23,7 @@ const playfair = Playfair_Display({
 export default function PrivateGPPage() {
   const [selectedConsultation, setSelectedConsultation] = useState<string | null>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleBookingClick = (consultationCode: string) => {
     setSelectedConsultation(consultationCode);
@@ -38,26 +41,46 @@ export default function PrivateGPPage() {
         }
       `}</style>
 
-      {/* Hero Section */}
-      <PrivateGPHero onBookingClick={() => handleBookingClick('private-gp')} />
+      {/* TopBar */}
+      <TopBar
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+      />
 
-      {/* Consultation Options Section */}
-      <ConsultationOptionsSection />
+      {/* Sidebar */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+      />
 
-      {/* Consultation Cards Section */}
-      <ConsultationCardsSection onBookingClick={handleBookingClick} />
+      {/* Main Content with Sidebar Margin */}
+      <div
+        className={`transition-all duration-200 ${
+          isSidebarOpen ? 'lg:ml-[260px]' : 'lg:ml-0'
+        }`}
+        style={{ marginTop: '64px' }}
+      >
+        {/* Hero Section */}
+        <PrivateGPHero onBookingClick={() => handleBookingClick('private-gp')} />
 
-      {/* Why Choose Private GP Section */}
-      <WhyChoosePrivateGPSection onBookingClick={() => handleBookingClick('private-gp')} />
+        {/* Consultation Options Section */}
+        <ConsultationOptionsSection />
 
-      {/* Common Conditions Section */}
-      <CommonConditionsSection />
+        {/* Consultation Cards Section */}
+        <ConsultationCardsSection onBookingClick={handleBookingClick} />
 
-      {/* FAQ Section */}
-      <PrivateGPFAQSection />
+        {/* Why Choose Private GP Section */}
+        <WhyChoosePrivateGPSection onBookingClick={() => handleBookingClick('private-gp')} />
 
-      {/* Footer */}
-      <FooterSection />
+        {/* Common Conditions Section */}
+        <CommonConditionsSection />
+
+        {/* FAQ Section */}
+        <PrivateGPFAQSection />
+
+        {/* Footer */}
+        <FooterSection />
+      </div>
 
       {/* Booking Side Panel */}
       <BookingSidePanel
