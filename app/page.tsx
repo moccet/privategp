@@ -1,65 +1,164 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import { Playfair_Display } from 'next/font/google';
+import TopBar from '@/components/TopBar';
+import Sidebar from '@/components/testing-landing/Sidebar';
+import BloodTestsHero from '@/components/services-landing/BloodTestsHero';
+import BloodTestPackagesOverview from '@/components/services-landing/BloodTestPackagesOverview';
+import BloodTestPanelCard from '@/components/services-landing/BloodTestPanelCard';
+import HowItWorksSection from '@/components/services-landing/HowItWorksSection';
+import DetectPreventRelaxSection from '@/components/services-landing/DetectPreventRelaxSection';
+import FAQSection from '@/components/services-landing/FAQSection';
+import FooterSection from '@/components/testing-landing/FooterSection';
+import BookingSidePanel from '@/components/BookingSidePanel';
+import StructuredData from '@/components/StructuredData';
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-playfair'
+});
+
+export default function BloodTestsPage() {
+  const [selectedTest, setSelectedTest] = useState<string | null>(null);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleBookingClick = (testCode: string) => {
+    setSelectedTest(testCode);
+    setIsBookingOpen(true);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className={`min-h-screen bg-white ${playfair.variable}`}>
+      {/* SEO: Structured Data for Search Engines and AI */}
+      <StructuredData />
+
+      <style jsx global>{`
+        :root {
+          --font-playfair: ${playfair.style.fontFamily};
+        }
+      `}</style>
+
+      {/* TopBar */}
+      <TopBar
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+      />
+
+      {/* Sidebar */}
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
+      />
+
+      {/* Main Content with Sidebar Margin */}
+      <div
+        className={`transition-all duration-200 ${
+          isSidebarOpen ? 'lg:ml-[260px]' : 'lg:ml-0'
+        }`}
+        style={{ marginTop: '64px' }}
+      >
+
+      {/* Hero Section */}
+      <BloodTestsHero onBookingClick={() => handleBookingClick('blood-tests')} />
+
+      {/* Blood Test Packages Overview */}
+      <BloodTestPackagesOverview />
+
+      {/* Lifestyle Panel */}
+      <BloodTestPanelCard
+        title="Lifestyle Panel"
+        price="£400"
+        markers="37 markers"
+        duration="30 minutes"
+        includedItems={[
+          'Full Blood Count',
+          'Liver Function',
+          'Kidney Function',
+          'Cholesterol Profile',
+          'Diabetes Screen',
+          'Vitamin D & B12',
+          'Iron Studies',
+          'Inflammation Markers',
+        ]}
+        imagePath="/images/bloods/2.jpg"
+        imageAlt="Lifestyle Panel - Core health markers and biomarker testing"
+        ctaText="Book Now"
+        onBookingClick={() => handleBookingClick('lifestyle-panel')}
+        buttonColor="#E5A0B0"
+        reverse={true}
+      />
+
+      {/* Hormone Panel */}
+      <BloodTestPanelCard
+        title="Hormone Panel"
+        price="£500"
+        markers="52 markers"
+        duration="30 minutes"
+        includedItems={[
+          'Lifestyle Panel',
+          'Full Thyroid Panel',
+          'Sex Hormones (Male/Female)',
+          'Fertility Markers',
+          'DHEA & Testosterone',
+          'Metabolic Hormones',
+          'Pituitary Function',
+        ]}
+        imagePath="/images/bloods/3.jpg"
+        imageAlt="Hormone Panel - Comprehensive hormonal health testing"
+        ctaText="Book Now"
+        onBookingClick={() => handleBookingClick('lifestyle-hormone')}
+      />
+
+      {/* Executive Panel */}
+      <BloodTestPanelCard
+        title="Executive Panel"
+        price="£650"
+        markers="60+ markers"
+        duration="45 minutes"
+        includedItems={[
+          'Hormone Panel',
+          'Cortisol & Stress Hormones',
+          'Advanced Cardiac Markers',
+          'Cancer Screening Markers',
+          'Autoimmune Panel',
+          'Advanced Vitamins & Minerals',
+          'Gut Health Markers',
+          'Genetic Risk Factors',
+          'Longevity Biomarkers',
+        ]}
+        imagePath="/images/bloods/4.jpg"
+        imageAlt="Executive Panel - Comprehensive executive health screening"
+        ctaText="Book Now"
+        onBookingClick={() => handleBookingClick('advanced-panel')}
+        buttonColor="#E5A07E"
+        reverse={true}
+      />
+
+      {/* How it Works Section */}
+      <HowItWorksSection />
+
+      {/* Detect. Prevent. Relax. Section */}
+      <DetectPreventRelaxSection />
+
+      {/* FAQ Section */}
+      <FAQSection />
+
+      {/* Footer */}
+      <FooterSection />
+      </div>
+
+      {/* Booking Side Panel */}
+      <BookingSidePanel
+        isOpen={isBookingOpen}
+        onClose={() => {
+          setIsBookingOpen(false);
+          setSelectedTest(null);
+        }}
+        service={selectedTest}
+      />
     </div>
   );
 }
