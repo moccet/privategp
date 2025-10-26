@@ -1,0 +1,146 @@
+/* Section */
+.section {
+  background-color: #FFFFFF;
+  padding: 6rem 2rem;
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Heading */
+.heading {
+  font-family: var(--font-playfair, 'Playfair Display', serif);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* FAQ List */
+.faqList {
+  display: flex;
+  flex-direction: column;
+}
+
+/* FAQ Item */
+.faqItem {
+  border-bottom: 1px solid #E5E5E5;
+}
+
+/* FAQ Question Button */
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.2s ease;
+}
+
+.faqQuestion:hover {
+  opacity: 0.7;
+}
+
+.questionText {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.5;
+  flex: 1;
+  padding-right: 2rem;
+}
+
+/* Arrow */
+.arrow {
+  flex-shrink: 0;
+  color: #1a1a1a;
+  transition: transform 0.3s ease;
+}
+
+.arrowOpen {
+  transform: rotate(90deg);
+}
+
+/* FAQ Answer */
+.faqAnswer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.answerOpen {
+  max-height: 500px;
+  padding-bottom: 2rem;
+}
+
+.answerText {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #6B6B6B;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.5rem;
+  }
+
+  .heading {
+    font-size: 2.5rem;
+  }
+
+  .questionText {
+    font-size: 1.05rem;
+    padding-right: 1rem;
+  }
+
+  .faqQuestion {
+    padding: 1.5rem 0;
+  }
+
+  .answerOpen {
+    padding-bottom: 1.5rem;
+  }
+
+  .answerText {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .questionText {
+    font-size: 1rem;
+  }
+
+  .faqQuestion {
+    padding: 1.25rem 0;
+  }
+
+  .arrow {
+    width: 20px;
+    height: 20px;
+  }
+}

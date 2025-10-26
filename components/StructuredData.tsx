@@ -1,12 +1,12 @@
 export default function StructuredData() {
   const organizationSchema = {
     "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    "name": "The Wellness London",
-    "description": "Private blood testing and advanced biomarker analysis clinic in London",
+    "@type": "Physician",
+    "name": "The Wellness London - Private GP",
+    "description": "Private GP consultations in London with GMC registered doctors. Same-day appointments available for in-person, video, and telephone consultations.",
     "url": "https://bloodtests.thewellnesslondon.com",
     "logo": "https://thewellnesslondon.com/logo.png",
-    "image": "https://bloodtests.thewellnesslondon.com/images/bloods/1.jpg",
+    "image": "https://bloodtests.thewellnesslondon.com/images/gp/1.jpeg",
     "telephone": "+44-20-1234-5678",
     "priceRange": "££-£££",
     "address": {
@@ -22,79 +22,68 @@ export default function StructuredData() {
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "09:00",
-        "closes": "18:00"
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
       }
     ],
     "sameAs": [
       "https://thewellnesslondon.com"
-    ]
+    ],
+    "medicalSpecialty": "General Practice"
   };
 
-  const lifestylePanelSchema = {
+  const videoConsultationSchema = {
     "@context": "https://schema.org",
-    "@type": "MedicalTest",
-    "name": "Lifestyle Blood Panel",
-    "description": "Comprehensive analysis of core health markers including blood count, organ function, and vitamins. 37 biomarkers tested.",
+    "@type": "MedicalProcedure",
+    "name": "Video GP Consultation",
+    "description": "Private video consultation with a GMC registered doctor. Available within 15 minutes for urgent cases or book in advance.",
     "provider": {
-      "@type": "MedicalBusiness",
+      "@type": "Physician",
       "name": "The Wellness London"
     },
     "offers": {
       "@type": "Offer",
-      "price": "400",
+      "price": "75",
       "priceCurrency": "GBP",
       "availability": "https://schema.org/InStock",
       "url": "https://bloodtests.thewellnesslondon.com"
-    },
-    "usedToDiagnose": {
-      "@type": "MedicalCondition",
-      "name": "General Health Assessment"
     }
   };
 
-  const hormonePanelSchema = {
+  const inPersonConsultationSchema = {
     "@context": "https://schema.org",
-    "@type": "MedicalTest",
-    "name": "Hormone Blood Panel",
-    "description": "Everything in Lifestyle Panel plus comprehensive hormonal health testing and fertility markers. 52 biomarkers tested.",
+    "@type": "MedicalProcedure",
+    "name": "In-Person GP Consultation",
+    "description": "Face-to-face consultation with a private GP at our London clinic. Same-day appointments available with GMC registered doctors.",
     "provider": {
-      "@type": "MedicalBusiness",
+      "@type": "Physician",
       "name": "The Wellness London"
     },
     "offers": {
       "@type": "Offer",
-      "price": "500",
+      "price": "150",
       "priceCurrency": "GBP",
       "availability": "https://schema.org/InStock",
       "url": "https://bloodtests.thewellnesslondon.com"
-    },
-    "usedToDiagnose": {
-      "@type": "MedicalCondition",
-      "name": "Hormonal Health Assessment"
     }
   };
 
-  const executivePanelSchema = {
+  const homeVisitSchema = {
     "@context": "https://schema.org",
-    "@type": "MedicalTest",
-    "name": "Executive Blood Panel",
-    "description": "Our most comprehensive panel including cancer screening, autoimmune markers, and longevity biomarkers. 60+ biomarkers tested.",
+    "@type": "MedicalProcedure",
+    "name": "Home Visit GP Consultation",
+    "description": "Private GP home visit service in London. GMC registered doctor visits you at home for comprehensive medical consultation.",
     "provider": {
-      "@type": "MedicalBusiness",
+      "@type": "Physician",
       "name": "The Wellness London"
     },
     "offers": {
       "@type": "Offer",
-      "price": "650",
+      "price": "250",
       "priceCurrency": "GBP",
       "availability": "https://schema.org/InStock",
       "url": "https://bloodtests.thewellnesslondon.com"
-    },
-    "usedToDiagnose": {
-      "@type": "MedicalCondition",
-      "name": "Comprehensive Health Screening"
     }
   };
 
@@ -104,42 +93,42 @@ export default function StructuredData() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "How quickly will I receive my results?",
+        "name": "How quickly can I see a private GP?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most results are available within 4-24 hours via our secure online portal. Complex tests may take up to 48 hours. You'll receive an email notification when your results are ready, along with a comprehensive report and doctor's analysis."
+          "text": "Most appointments are available within 15 minutes for video consultations and same-day for in-person visits. Our GMC registered doctors are available 24/7 to provide you with the medical care you need, when you need it."
         }
       },
       {
         "@type": "Question",
-        "name": "Do I need to fast before my test?",
+        "name": "Do I need an NHS referral?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For most blood tests, we recommend fasting for 8-12 hours before your appointment. You can drink water during this time. However, fasting requirements vary by test type. When you book, we'll provide specific preparation instructions for your chosen panel."
+          "text": "No NHS referral is required. Our private GP service is open to anyone seeking medical consultation. You can book directly online or by phone, and see a GMC registered doctor at your convenience."
         }
       },
       {
         "@type": "Question",
-        "name": "Is a doctor's referral needed?",
+        "name": "Can the GP prescribe medication?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No referral is needed. Our private blood testing service is available to anyone who wants to proactively monitor their health. However, we do recommend discussing results with your GP or our doctors, especially if any abnormalities are detected."
+          "text": "Yes, our GMC registered doctors can prescribe medication when clinically appropriate. Prescriptions are issued electronically and can be sent to your chosen pharmacy. Same-day prescriptions are available for urgent cases."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I claim on private health insurance?",
+        "name": "Can I get a specialist referral?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Many private health insurance policies cover diagnostic blood tests. We can provide itemised receipts and medical reports for insurance claims. Please check with your provider about coverage and claim procedures before booking."
+          "text": "Yes, our GPs can provide referrals to specialist consultants when medically necessary. We have priority access to leading specialists across London and can arrange appointments quickly, often within days rather than months."
         }
       },
       {
         "@type": "Question",
-        "name": "What's included in the price?",
+        "name": "Is private GP consultation covered by insurance?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The price includes: blood sample collection by our certified phlebotomist, all laboratory testing, secure online results portal access, comprehensive report with reference ranges, and doctor's analysis with health recommendations. No hidden fees."
+          "text": "Many private health insurance policies cover GP consultations. We can provide detailed invoices and medical reports for your insurance claims. Please check your specific policy coverage before booking, or contact us for assistance."
         }
       }
     ]
@@ -164,7 +153,7 @@ export default function StructuredData() {
       {
         "@type": "ListItem",
         "position": 3,
-        "name": "Blood Tests",
+        "name": "Private GP",
         "item": "https://bloodtests.thewellnesslondon.com"
       }
     ]
@@ -173,33 +162,33 @@ export default function StructuredData() {
   const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to Book a Private Blood Test",
-    "description": "Simple process to book your private blood test appointment",
+    "name": "How to Book a Private GP Consultation",
+    "description": "Simple process to book your private GP appointment with a GMC registered doctor",
     "step": [
       {
         "@type": "HowToStep",
         "position": 1,
-        "name": "Book Online",
-        "text": "Choose your test and book a convenient appointment slot. Same-day availability.",
+        "name": "Choose Your Consultation Type",
+        "text": "Select from video, in-person, or home visit consultation based on your needs.",
         "url": "https://bloodtests.thewellnesslondon.com"
       },
       {
         "@type": "HowToStep",
         "position": 2,
-        "name": "Visit Our Clinic",
-        "text": "Quick 10-minute visit. Our phlebotomists make the process comfortable and efficient."
+        "name": "Book Your Appointment",
+        "text": "Choose a convenient time slot. Same-day appointments available, or book in advance."
       },
       {
         "@type": "HowToStep",
         "position": 3,
-        "name": "Get Results",
-        "text": "Receive your results via secure portal within 4-24 hours, depending on test."
+        "name": "See Your Doctor",
+        "text": "Meet with a GMC registered doctor for comprehensive medical consultation. Typically 30 minutes."
       },
       {
         "@type": "HowToStep",
         "position": 4,
-        "name": "Doctor Review",
-        "text": "Comprehensive report with doctor's analysis and health recommendations."
+        "name": "Get Your Prescription or Referral",
+        "text": "Receive prescriptions electronically or specialist referral letters immediately after your consultation."
       }
     ]
   };
@@ -212,15 +201,15 @@ export default function StructuredData() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(lifestylePanelSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoConsultationSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(hormonePanelSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(inPersonConsultationSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(executivePanelSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeVisitSchema) }}
       />
       <script
         type="application/ld+json"
